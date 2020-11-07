@@ -13,6 +13,7 @@ services:
       - internet
     depends_on:
       - es_php_fpm
+
   es_php_fpm:
     image: es_php_fpm
     build:
@@ -23,13 +24,39 @@ services:
       MYSQL_USER: engelsystem
       MYSQL_PASSWORD: engelsystem
       MYSQL_DATABASE: engelsystem
-    env_file: deployment.env
+
+      # some optional env vars and their defaults can be seen here
+      # for exact information have a look at config/config.default.php
+      # MAINTENANCE: false
+      # APP_NAME: "Engelsystem"
+      # ENVIRONMENT:  'production'
+      # APP_URL: null
+      # FAQ_URL: 'https://events.ccc.de/congress/2013/wiki/Static:Volunteers'
+      # MAIL_DRIVER: 'mail'
+      # MAIL_FROM_ADDRESS: 'noreply@engelsystem.de'
+      # MAIL_FROM_NAME: Engelsystem
+      # MAIL_HOST: 'localhost'
+      # MAIL_PORT: 587
+      # THEME: 1
+      # HOME_SITE: 'news'
+      # DISPLAY_NEWS: 10
+      # REGISTRATION_ENABLED: true
+      # PASSWORD_MINIMUM_LENGTH: 8
+      # REGISTRATION_ENABLE_DECT: true
+      # REGISTRATION_ENABLE_USERNAME: false
+      # REGISTRATION_ENABLE_DECT: false
+      # REGISTRATION_ENABLE_PLANNED_ARRIVAL: true
+      # REGISTRATION_ENABLE_TSHIRT: true
+      # TIMEZONE: 'Europe/Berlin'
+      # DEFAULT_LOCALE: 'en_US'
+      # ADD_HEADERS: true
     networks:
       - database
       - fpm
       - internet
     depends_on:
       - es_database
+
   es_database:
     image: mariadb:10.2
     environment:
@@ -42,6 +69,7 @@ services:
       - db:/var/lib/mysql
     networks:
       - database
+
 volumes:
   db: {}
 
